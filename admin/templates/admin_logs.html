@@ -1,0 +1,97 @@
+{if $full_page}
+{include file="header.html"}
+<div class="form-div">
+<table>
+    <tr>
+      <td width="50%">
+      <form name="theForm" method="POST" action="admin_logs.php">
+      <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+      按IP地址查看
+      <select name="admin_ip" onchange="searchAdminIP(this.value)">
+      <option value='0'>选择IP地址...</option>
+      {$ip_list}
+      </select>
+      按管理员查看
+      <select name="admin_id" onchange="searchAdminID(this.value)">
+      <option value='0'>选择管理员...</option>
+      {$id_list}
+      </select>
+      </form>
+      </td>
+      <td>
+      <form name="drop_form" action="admin_logs.php?act=batch_drop" method="POST">
+      清除日志
+      <select name="log_date">
+        <option value='0'>选择清除的日期...</option>
+        <option value='1'>一周之前</option>
+        <option value='2'>一个月之前</option>
+        <option value='3'>三个月之前</option>
+        <option value='4'>半年之前</option>
+        <option value='5'>一年之前</option>
+      </select>
+      <input name="drop_type_date" type="submit" value=" 确定 " class="button" />
+      </form>
+      </td>
+    </tr>
+</table>
+</div>
+<form method="POST" action="admin_logs.php?act=batch_drop" name="listForm">
+<div class="list-div" id="listDiv">
+{/if}
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+    <tr>
+      <th><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox">
+ 编号</th>
+      <th>操作者</th>
+      <th>操作日期</th>
+      <th>IP地址</th>
+      <th>操作记录</th>
+    </tr>
+    {foreach from=$log_list item=list}
+    <tr>
+      <td width="10%"><span><input name="checkboxes[]" type="checkbox" value="{$list.log_id}" /> {$list.log_id}</span></td>
+      <td width="15%" class="first-cell"><span>{$list.true_name|escape:html}</span></td>
+      <td width="20%"><span>{$list.log_time}</span></td>
+      <td width="15%"><span>{$list.ip_address}</span></td>
+      <td width="40%"><span>{$list.log_info}</span></td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="5">暂无记录</td></tr>
+    {/foreach}
+    <tr>
+      <td colspan="2"><input name="drop_type_id" type="submit" id="btnSubmit" value="清除日志" disabled="true" class="button" /></td>
+      <td align="right" nowrap="true" colspan="5">{include file="page.html"}</td>
+    </tr>
+  </table>
+{if $full_page}
+</div>
+</form>
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+  {literal}
+  /**
+   * 查询日志
+   */
+  function searchAdminIP(admin_ip)
+  {
+    listTable.filter.admin_ip = admin_ip;
+    listTable.filter.page = 1;
+    listTable.loadList();
+  }
+  function searchAdminID(admin_id)
+  {
+    listTable.filter.admin_id = admin_id;
+    listTable.filter.page = 1;
+    listTable.loadList();
+  }
+  {/literal}
+  //-->
+</script>
+{include file="footer.html"}
+{/if}

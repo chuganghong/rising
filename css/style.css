@@ -1,0 +1,15 @@
+#header {
+	height: 116px;
+	width:100%;
+	background-image:url(../images/body_bg.gif);
+	background-repeat:repeat-x;
+	margin:0 auto;
+}
+#header_box {
+	width:780px;
+	height: 105px;
+    position:absolute;
+    left:50%;
+	margin-left:-390px;
+	padding-bottom:11px;
+}

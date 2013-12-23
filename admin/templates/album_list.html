@@ -1,0 +1,102 @@
+{if $full_page}
+{include file="header.html"}
+<div class="list-div" id="listDiv">
+{/if}
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="list-table" class="table">
+    <tr>
+      <th>图集名称</th>
+<!--
+     <th>URL</th>
+-->
+      <th>排序</th>
+      <th>操作</th>
+    </tr>
+    {section name=por loop=$Caseloca}
+    <tr align="center" class="{$Caseloca[por].level}">
+	<!--
+	    <td>{$Caseloca[por].cat_name}&nbsp;</td>
+     <td>{$Caseloca[por].action_name}</td>
+     <td><img src="images/{if $Caseloca[por].show_in_nav eq 0}no{else}yes{/if}.gif" border="0" /></td>
+
+	-->
+      <td align="left" class="first-cell">
+
+      <img src="images/menu_minus.gif" width="9" height="9" border="0" style="margin-left:{$Caseloca[por].level}em" onclick="rowClicked(this)" />
+
+      <span>{$Caseloca[por].cat_name}</span>
+      </td>
+     <td>{$Caseloca[por].sort_order}</td>
+      <td>
+      <a href="album.php?act=edit&cat_id={$Caseloca[por].cat_id}">编辑</a> | 
+	  <a href="pic.php?act=list&cat_id={$Caseloca[por].cat_id}">管理</a> | 
+      <a href="javascript:;" onclick="listTable.remove({$Caseloca[por].cat_id}, '您确认要删除这条记录吗?')" title="删除">移除</a></td>
+    </tr>
+    {sectionelse}
+	<tr>
+      <td colspan="5">暂无记录</td>
+    </tr>
+    {/section}
+  </table>
+{if $full_page}
+</div>
+<script language="JavaScript">
+{literal}
+<!--
+var imgPlus = new Image();
+imgPlus.src = "images/menu_plus.gif";
+
+/**
+ * 折叠分类列表
+ */
+function rowClicked(obj)
+{
+  var Browser = new Object();
+  Browser.isIE = window.ActiveXObject ? true : false;
+  obj = obj.parentNode.parentNode;
+  
+  var url = obj.src;
+  var tbl = document.getElementById("list-table");
+  var lvl = parseInt(obj.className);
+  var fnd = false;
+
+  for (i = 0; i < tbl.rows.length; i++)
+  {
+      var row = tbl.rows[i];
+
+      if (tbl.rows[i] == obj)
+      {
+          fnd = true;
+      }
+      else
+      {
+          if (fnd == true)
+          {
+              var cur = parseInt(row.className);
+              if (cur > lvl)
+              {
+                  row.style.display = (row.style.display != 'none') ? 'none' : (Browser.isIE) ? 'block' : 'table-row';
+              }
+              else
+              {
+                  fnd = false;
+                  break;
+              }
+          }
+      }
+  }
+
+  for (i = 0; i < obj.cells[0].childNodes.length; i++)
+  {
+      var imgObj = obj.cells[0].childNodes[i];
+      if (imgObj.tagName == "IMG" && imgObj.src != 'images/menu_plus.gif')
+      {
+          imgObj.src = (imgObj.src == imgPlus.src) ? 'images/menu_minus.gif' : imgPlus.src;
+      }
+  }
+}
+//-->
+{/literal}
+</script>
+
+{include file="footer.html"}
+{/if}

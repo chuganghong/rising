@@ -1,0 +1,96 @@
+{if $full_page}
+{include file="header.html"}
+{literal}
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".player a").mouseover(function(){
+		$(this).next().css('position','absolute');	
+		$(this).next().show('slow');							   
+	});
+	$(".player a").mouseout(function(){
+		$(this).next().hide('slow');							   
+	});
+});
+</script>
+{/literal}
+<div class="list-div" id="listDiv">
+{/if}
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="list-table" class="table">
+    <tr >
+	  <th>图片ID</th>      
+	  <th>图片</th>
+	 
+	  <th>操作</th>
+      <!--<th>轮播图片链接</th>
+      <th>分类</th>
+     <th>图片标题</th>	 
+      <th>图片标题(英文)</th>
+      <th>图片说明</th>
+      <th>图片说明(简体)</th>
+      <th>图片说明(英文)</th>
+	   <th>图片类型</th> 
+		 <th>小图</th>
+	  <th>大图</th>
+	   <th>排序</th>
+      <th>排序</th>-->	 
+      
+    </tr>
+    {foreach from=$flash item=item key=key}
+    <tr>
+	  <td>{$item.flash_id}</td>
+	  <td><img src="../{$item.img_src}" border="0" style="width:150px;height:100px" /></td>
+	 
+	  <td>
+      <a href="works.php?act=edit&flash_id={$item.flash_id}&bc={$bc}" title="编辑">编辑</a>
+	  </td>
+
+	  <!--效果：当鼠标移到URL上时显示图片
+      <td class="player">
+      	<a href="{$item.img_src}" target="_blank">{$item.img_src}</a>
+        <div style="display:none;z-index:2">
+        	<img src="../{$item.img_src}" border="0" />
+        </div>
+		
+      </td>
+	  	  <td><img src="../{$item.thumb_src}" border="0" style="width:150px;height:100px" /></td>
+
+	  
+       <td>{$item.img_sort}&nbsp;</td>
+      <td>{$item.cat_name}</td>
+      <td>{if $item.img_type eq 1}BANNER{else}其他{/if}</td>
+      <!--<td><a href="{$item.img_link}" target="_blank">{$item.img_link}</a></td>
+      
+      <td>{$item.img_title_tw}&nbsp;</td>
+       <td>{$item.img_title_en}&nbsp;</td>
+      <td>{$item.img_alt}&nbsp;</td>
+      <td>{$item.img_alt_tw}&nbsp;</td>
+      <td>{$item.img_alt_en}&nbsp;</td>
+      <td>{$item.img_sort}&nbsp;</td>-->
+
+        <!--<a href="javascript:;" onclick="listTable.remove({$item.flash_id}, '您确认要删除这条记录吗?')" title="移除">移除</a>-->
+    </tr>
+    {foreachelse}
+    <tr><td colspan="4">暂无记录</td></tr>
+    {/foreach}
+	{if $which}
+    <tr>
+      <td>
+    	<input name="add" type="submit" id="btnSubmit" value="{$action_link_special.text}" class="button" onclick="location.href='{$action_link_special.href}';" />
+        <td align="right"  colspan="3">{include file="page.html"}</td>
+      </td>
+    </tr>
+	{/if}
+  </table>
+{if $full_page}
+</div>
+
+<script language="JavaScript">
+	listTable.recordCount = {$record_count};
+	listTable.pageCount = {$page_count};
+	
+	{foreach from=$filter item=item key=key}
+	listTable.filter.{$key} = '{$item}';
+	{/foreach}
+</script>
+{include file="footer.html"}
+{/if}

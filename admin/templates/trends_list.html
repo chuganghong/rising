@@ -1,0 +1,147 @@
+{if $full_page}
+{include file="header.html"}
+<link href="../css/color.css" rel="stylesheet" type="text/css" />
+<div class="form-div">
+<table>
+    <tr>
+      <td width="50%">
+    <form name="theForm" method="POST" action="javascript:searchData()" >
+      <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+       请输入标题:
+      <input type="text" name="searchs" />
+      
+	  <!--
+      按分类查看
+      <select name="cat_id" onchange="searchCateID(this.value)">
+      <option value='0'>选择栏目...</option>
+      {$cat_list}
+      </select> 
+	  -->
+	 
+        <input type="submit" value=" 搜索 " class="button" />
+	</form>
+      </td>
+    </tr>
+</table>
+{literal}
+<script language="JavaScript"> 
+function searchData()
+{
+	listTable.filter.searchs = document.forms['theForm'].elements['searchs'].value;
+	//listTable.filter.cat_id = document.forms['theForm'].elements['cat_id'].value;
+	listTable.filter['page'] = 1;
+	listTable.loadList();
+}
+ function batch_drop()
+  {
+	if(confirm('您确认要批量删除这些记录吗?'))
+	{
+		document.listForm.act.value='batch_drop';	
+		document.listForm.submit();
+	}
+  }
+  
+  
+  //批量设置邮件内容
+  function psend()
+  {
+	var msg = '您确认要批量发送这些内容吗?';
+	if(confirm(msg))
+	{
+		document.listForm.act.value='psend';	
+		document.listForm.submit();
+	}
+  }
+  
+  //批量取消邮件内容
+  function psend_no()
+  {
+	var msg = '您确认要批量发送这些内容吗?';
+	if(confirm(msg))
+	{
+		document.listForm.act.value='psend_no';	
+		document.listForm.submit();
+	}
+  }
+  
+  
+</script>
+{/literal}
+</div>
+<form method="POST" action="trends.php?act=batch_drop" name="listForm">
+<div class="list-div" id="listDiv">
+{/if}
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="list-table" class="table">
+    <tr>
+      <th><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox">编号</th>
+      
+      <th>标题</th>
+<!-- 
+<th>分类</th>     
+<th>标题（简体）</th>
+      <th>标题（英文）</th>
+-->
+      <th>添加时间</th>
+      <th>最后修改时间</th>
+      <th>排序</th>
+	  <th>发送状态</th>
+      <th>编辑</th>
+    </tr>
+    {section name=por loop=$Case}
+    <tr>
+      <td><span><input name="checkboxes[]" type="checkbox" value="{$Case[por].Case_id}" /> {$Case[por].Case_id}</span></td>
+     
+       <td>{$Case[por].title}</td>
+       <!--
+	    <td>{$Case[por].cat_name}</td>
+	   <td>{$Case[por].title_tw}</td>
+       <td>{$Case[por].title_en}</td>-->
+      <td>{$Case[por].addtime}</td>
+      <td>{if $Case[por].updatetime}{$Case[por].updatetime}{else}N/A{/if}</td>
+      
+      <td>{$Case[por].sort_order}</td>
+	  <td>{if $Case[por].issend}是{else}否{/if}</td> 
+      <td align="center">
+    
+      <a href="trends.php?act=edit&Case_id={$Case[por].Case_id}">编辑</a> | 
+      <a href="javascript:;" onclick="listTable.remove({$Case[por].Case_id}, '您确认要删除这条记录吗?')" title="删除">移除</a> |
+	   <a href="trends.php?act=send&user_id={$Case[por].Case_id}">发送</a> |
+	  <a href="trends.php?act=send_no&user_id={$Case[por].Case_id}">不发送</a>
+	  </td>
+    </tr>
+    {sectionelse}
+	<tr>
+      <td colspan="10">暂无记录</td>
+    </tr>
+    {/section}
+    <tr>
+    <td >
+    <input type="hidden" name="act" value="" />
+    <input name="swap_type_id" type="button" id="btnSubmit1" value="批量删除" disabled="disabled" class="button" onClick="batch_drop();"  />    
+	<td>
+	<input name="swap_type_id3" type="button" id="btnSubmit3" value="批量发送" disabled="disabled" class="button" onClick="psend();"  />
+	</td>
+	<td>
+	    <input name="swap_type_id2" type="button" id="btnSubmit2" value="批量取消" disabled="disabled" class="button" onClick="psend_no();"  />
+	</td>
+    <td colspan="8" align="right">{include file="page.html"}</td>
+    </tr>
+  </table>
+{if $full_page}
+</div>
+</form>
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+  
+  
+
+  -->
+</script>
+{include file="footer.html"}
+{/if}

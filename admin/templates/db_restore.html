@@ -1,0 +1,121 @@
+{include file="header.html"}
+{if $warning}
+<ul style="padding:0; margin: 0; list-style-type:none; color: #CC0000;">
+  <li style="border: 1px solid #CC0000; background: #FFFFCC; padding: 10px; margin-bottom: 5px;" >{$warning}</li>
+</ul>
+{/if}
+<!-- start list -->
+<div class="list-div" id="listDiv">
+  <form method="post" action="database.php" enctype="multipart/form-data">
+  <table cellpadding='0' cellspacing='0' class="table" width="100%">
+  <tr>
+    <th colspan="2">恢复备份</th>
+  </tr>
+  <tr>
+    <td width="100">本地SQL文件</td>
+    <td><input type="file" name="sqlfile" size="50"></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="hidden" name = "act" value = "upload_sql"><input type="submit" value=上传并执行SQL语言 class="button"></td>
+  </tr>
+  </table>
+  </form>
+
+</div>
+<br />
+<br />
+<div class="list-div" id="listDiv">
+<form action="database.php" name="file_list" method="POST" onsubmit="return confirm('你确定要删除选中数据吗？');" >
+<table class="table" cellspacing='0' cellpadding='0' width="100%">
+  <tr>
+    <th colspan='7'>服务器上备份文件</th>
+  </tr>
+  <tr>
+    <th width='50'><label><input type="checkbox" class="radio" name="chkall" onclick="checkall(this.form, 'file[]')">移除</label></th>
+    <th>文件名</th>
+    <th width="71">版本</th>
+    <th width="208">时间</th>
+    <th width="99">大小</th>
+    <th width="91">卷</th>
+    <th width="30" align="center">操作</th>
+  </tr>
+  {foreach from=$list item=item}
+  <tr {if $item.mark eq 2}style="display:none"{/if}>
+   <td><input type="checkbox" class="radio" name="file[]" value="{$item.name}" /></td>
+   <td>{if $item.mark eq 1}<img src="images/menu_plus.gif" onclick="rowClicked(this)">{/if}{if $item.mark eq 2}<img src="images/menu_arrow.gif">{/if}<a href="../data/sqldata/{$item.name}"> {$item.name} </a></td>
+   <td>{$item.ver}</td>
+   <td>{$item.add_time}</td>
+   <td>{$item.file_size}</td>
+   <td>vol:{$item.vol}</td>
+   <td align="center">{if $item.mark neq 2}<a href="database.php?act=import&file_name={$item.name}">[导入]</a>{else}&nbsp;{/if}</td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td height="23" colspan='7' align="center"><input type="hidden" name="act" value="remove"><input type="submit" value="删除" class="button" /></td>
+  </tr>
+</table>
+</form>
+</div>
+{literal}
+<script language="JavaScript">
+function checkall(frm, chk)
+{
+    for (i = 0; i < frm.elements.length; i++)
+    {
+        if (frm.elements[i].name == chk)
+        {
+            frm.elements[i].checked = frm.elements['chkall'].checked;
+        }
+    }
+}
+
+function rowClicked(obj)
+{
+  var row = obj.parentNode.parentNode;
+  var tbl = row.parentNode.parentNode;
+  var test = false;
+  var img = '';
+
+  if (obj.src.substr(obj.src.lastIndexOf('/') + 1) == "menu_minus.gif")
+  obj.src = "images/menu_plus.gif";
+  else
+  obj.src = "images/menu_minus.gif";
+
+
+
+  for (i = 0; i < tbl.rows.length; i++)
+  {
+    var cell = tbl.rows[i].cells[1];
+
+    if (cell && cell.childNodes[0].src)
+    {
+      img = cell.childNodes[0].src.substr(cell.childNodes[0].src.lastIndexOf('/') + 1);
+    }
+    else
+    {
+      img = '';
+    }
+
+    if (test && img)
+    {
+      if (img == "menu_arrow.gif")
+      {
+        tbl.rows[i].style.display = tbl.rows[i].style.display != 'none' ? 'none' : (Browser.isIE) ? 'block' : 'table-row';
+      }
+      else
+      {
+        test=false;
+      }
+    }
+
+    if (tbl.rows[i] == row)
+    {
+      test = true;
+    }
+  }
+}
+//-->
+</script>
+{/literal}
+{include file="footer.html"}

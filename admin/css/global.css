@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background:#F6F9FB;
+  font: 12px "sans-serif", "Arial", "Verdana";
+}
+
+p, td, div {
+  font: 12px "sans-serif", "Arial", "Verdana";
+}
+
+th {
+  font: 12px "sans-serif", "Arial", "Verdana";
+}
+
+form,h3 {
+  margin: 0px;
+  padding: 0px;
+}
+ul,li {margin:0;padding:0;list-style:none;}
+input, textarea, select {
+  font: 12px "courier new";
+  margin-bottom:2px
+}
+
+.radio{ margin-top:-1px; vertical-align:middle; }
+
+input.button {
+  padding: 2px 8px 0px;
+  margin: 2px 2px;
+  border: 1px solid #2D5082;
+  background: url(../images/button_bg.gif) repeat-x;
+}
+input.captcha {
+  text-transform: uppercase;
+}
+/*后台登录按钮*/
+.btn_submit, .btn_submit:hover, .btn_submit:focus{border:none; background:none}
+
+a {text-decoration:none;cursor:pointer;}
+	a,a:link,a:visited{color:#1E5494;}
+	a:hover{text-decoration:underline;}
+	
+.clear {
+  clear: both;
+  float: none;
+  font-size: 0px;
+  margin: 0;
+  padding: 0;
+  display:block;
+}

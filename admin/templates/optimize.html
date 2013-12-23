@@ -1,0 +1,38 @@
+{include file="header.html"}
+<!-- start form -->
+<div class="form-div">
+<form method="post" action="database.php" name="theForm">
+总碎片数:{$num}
+<input type="submit" value="开始进行数据表优化" class="button" />
+<input type= "hidden" name= "num" value = "{$num}">
+<input type= "hidden" name="act" value = "run_optimize">
+</form>
+</div>
+<!-- end form -->
+<!-- start list -->
+<div class="list-div" id="listDiv">
+<table cellspacing='0' cellpadding='0' id='listTable' class="table">
+  <tr>
+    <th width="81">数据表</th>
+    <th width="85">数据表类型</th>
+    <th width="104">记录数</th>
+    <th width="101">数据</th>
+    <th width="104">碎片</th>
+    <th width="95">字符集</th>
+    <th width="771">状态</th>
+  </tr>
+  {foreach from=$list  item=item}
+    <tr>
+      <td class="first-cell">{$item.table}</td>
+      <td align ="left">{$item.type}</td>
+      <td align ="right">{$item.rec_num}</td>
+      <td align ="right">{$item.rec_size}</td>
+      <td align ="right">{$item.rec_chip}</td>
+      <td align ="left">{$item.charset}</td>
+      <td align ="left">{$item.status}</td>
+    </tr>
+  {/foreach}
+</table>
+</div>
+
+{include file="footer.html"}

@@ -1,0 +1,97 @@
+body {
+	font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,Arial,sans-serif;
+	line-height:20px;
+	font-size: 14px;
+	color:#7f7d7e; 
+	margin:0;
+	padding:0;
+}
+form,span,dl,dt,dd {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul,li {
+	margin: 0px;
+	padding: 0px;
+	list-style-type:none;
+}
+img {
+	margin: 0px;
+	border:0px;
+	padding:0px;
+}
+h2 {
+	font-size: 14px;
+	color: #363231;
+	line-height:25px;
+	margin: 0px;
+	padding: 0px;
+	background-image: url(../images/title_red.gif);
+	background-repeat: no-repeat;
+	background-position: 0px 6px;
+	text-indent:10px;
+}
+/*clear*/
+.clearFloat{clear:both;}
+
+/*link*/
+a:link,a:visited {
+	color: #3e3d39;
+	text-decoration: none;
+}
+a:hover {
+	color: #727272;
+	text-decoration: none;
+}
+a.arial:link,a.arial:visited {
+	color: #dededc;
+	text-decoration: none;
+}
+a.arial:hover {
+	color: #ffffff;
+	text-decoration: none;
+}
+a.f_nav_link:link,a.f_nav_link:visited {
+	color: #f3f3f3;
+	text-decoration: none;
+}
+a.f_nav_link:hover {
+	color: #ffffff;
+	text-decoration: none;
+}
+/*globle_css*/
+.main {
+	width:100%;
+	margin:0 auto;
+}
+.mainbox {
+	width:780px;
+    position: relative;
+    left:50%;
+	margin-left:-390px;
+}
+.banner {
+	width:780px;
+	height:256px;
+	margin-bottom:1px;
+}
+.banner_btom {
+	width:766px;
+	height:33px;
+	line-height:33px;
+	color:#f9f7f8;
+	background-color:#969495;
+	padding-right:14px;
+	text-align:right;
+	word-spacing:30px;
+	background-image: url(../images/star.gif);
+	background-repeat:no-repeat;
+	background-position: 531px 10px;
+	font-size:14px;
+}
+.content {
+	width:780px;
+	padding-bottom:20px;
+	padding-top:30px;
+}

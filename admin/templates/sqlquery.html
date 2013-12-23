@@ -1,0 +1,63 @@
+{include file="header.html"}
+
+  <form name="sqlFrom" method="post" action="" onsubmit="return validate()">
+  <table class="table" border="0" cellpadding="0" cellspacing="0">
+    <tr><th width="1385">运行 SQL 查询</th>
+    </tr>
+    <tr><td><span style="color: rgb(255, 0, 0);"><strong>执行SQL将直接操作数据库，请谨慎使用</strong></span></td></tr>
+    <tr><td><textarea name="sql" rows="6" cols="80">{$sql}</textarea></td></tr>
+    <tr><td><input type="hidden" name="act" value="query"> <input type="submit" name="button" id="button" class="button" value=" 提交查询 " /></td>
+    </tr>
+  </table>
+  </form>
+
+
+<!-- start SQL list -->
+<div class="list-div" id="listDiv">
+  {if $type eq 0}
+  <!-- 出错提示-->
+  <span style="color: rgb(255, 0, 0);"><strong>:</strong></span><br />
+  {$error}
+  {/if}
+  {if $type eq 1}
+  <!-- 执行成功-->
+  <center><h3>SQL执行成功</h3></center>
+  {/if}
+  {if $type eq 2}
+  <!--有返回值-->
+    {$result}
+  {/if}
+</div>
+<script language="JavaScript">
+<!--
+{literal}
+document.forms['sqlFrom'].elements['sql'].focus();
+
+
+
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+  var frm = document.forms['sqlFrom'];
+  var sql = frm.elements['sql'].value;
+  var msg ='';
+
+  if (sql.length == 0 )
+  {
+    msg += "SQL语句不能为空\n";
+  }
+
+  if (msg.length > 0)
+  {
+    alert (msg);
+    return false;
+  }
+
+  return true;
+}
+//-->
+{/literal}
+</script>
+{include file="footer.html"}

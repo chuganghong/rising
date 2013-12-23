@@ -1,0 +1,88 @@
+{if $full_page}
+{include file="header.html"}
+<link href="../css/color.css" rel="stylesheet" type="text/css" />
+<div class="form-div">
+<table>
+    <tr>
+      <td width="50%">
+    <form name="theForm" method="POST" action="javascript:searchData()" >
+      <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+       请输入姓名:
+      <input type="text" name="searchs" />
+        <input type="submit" value=" 搜索 " class="button" />
+	</form>
+      </td>
+    </tr>
+</table>
+{literal}
+<script language="JavaScript"> 
+function searchData()
+{
+	listTable.filter.searchs = document.forms['theForm'].elements['searchs'].value;
+	listTable.filter['page'] = 1;
+	listTable.loadList();
+}
+ function batch_drop()
+  {
+	if(confirm('您确认要批量删除这些记录吗?'))
+	{
+		document.listForm.act.value='batch_drop';	
+		document.listForm.submit();
+	}
+  }
+</script>
+{/literal}
+</div>
+<form method="POST" action="Contact_list.php?act=batch_drop" name="listForm">
+<div class="list-div" id="listDiv">
+{/if}
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="list-table" class="table">
+    <tr>
+      <th><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox">编号</th>
+      <th>姓名</th>
+      <th>电话号码</th>
+      <th>EMAIL</th>
+      <th>信息</th>
+      <th>编辑</th>
+    </tr>
+    {section name=por loop=$Contact}
+    <tr>
+      <td><span><input name="checkboxes[]" type="checkbox" value="{$Contact[por].u_Id}" /> {$Contact[por].u_Id}</span></td>
+      <td>{$Contact[por].u_Name} </td>
+      <td>{$Contact[por].u_Tel}</td>
+      <td>{$Contact[por].u_Email}</td>
+      <td>{$Contact[por].u_Message}</td>
+      <td align="center">
+      <a href="javascript:;" onclick="listTable.remove({$Contact[por].u_Id}, '您确认要删除这条记录吗?')" title="删除">移除</a></td>
+    </tr>
+    {sectionelse}
+	<tr>
+      <td colspan="10">暂无记录</td>
+    </tr>
+    {/section}
+    <tr>
+    <td >
+    <input type="hidden" name="act" value="" />
+    <input name="swap_type_id" type="button" id="btnSubmit1" value="批量删除" disabled="disabled" class="button" onClick="batch_drop();"  />
+    </td>
+    <td colspan="10" align="right">{include file="page.html"}</td>
+    </tr>
+  </table>
+{if $full_page}
+</div>
+</form>
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+  
+  
+
+  -->
+</script>
+{include file="footer.html"}
+{/if}

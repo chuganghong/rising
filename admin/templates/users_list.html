@@ -1,0 +1,120 @@
+{if $full_page}
+{include file="header.html"}
+<link href="../css/color.css" rel="stylesheet" type="text/css" />
+<div class="form-div">
+<table>
+    <tr>
+      <td width="50%">
+    <form name="theForm" method="POST" action="javascript:searchData()" >
+      <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+       请输入会员名称:
+      <input type="text" name="searchs" />      
+        <input type="submit" value=" 搜索 " class="button" />
+	</form>
+      </td>
+    </tr>
+</table>
+{literal}
+<script language="JavaScript"> 
+function searchData()
+{
+	listTable.filter.searchs = document.forms['theForm'].elements['searchs'].value;
+	//listTable.filter.cat_id = document.forms['theForm'].elements['cat_id'].value;
+	listTable.filter['page'] = 1;
+	listTable.loadList();
+}
+ function batch_drop()
+  {
+	var msg = '您确认要批量向这些用户发送邮件吗?';
+	if(confirm(msg))
+	{
+		document.listForm.act.value='batch_drop';	
+		document.listForm.submit();
+	}
+  }
+  
+  function batch_drop_no()
+  {
+	var msg = '您确认要批量取消这些用户发送邮件吗?';
+	if(confirm(msg))
+	{
+		document.listForm.act.value='batch_drop_no';	
+		document.listForm.submit();
+	}
+  }
+</script>
+{/literal}
+</div>
+<form method="POST" action="book.php?act=batch_drop" name="listForm">
+<div class="list-div" id="listDiv">
+{/if}
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="list-table" class="table">
+    <tr>
+      <th><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox">编号</th>     
+      <th>用户名</th>
+      <th>公司</th>
+      <th>职位</th>
+      <th>Email地址</th>
+      <th>订阅时间</th>
+      <th>电话号码</th>
+	  <th>发送状态</th>
+      <th>操作</th> 
+    </tr>
+    {section name=por loop=$Case}
+    <tr>
+      <td><span><input name="checkboxes[]" type="checkbox" value="{$Case[por].user_id}" /> {$Case[por].user_id}</span></td>
+      <td>{$Case[por].user_name}</td>
+	   <td>{$Case[por].company}</td>       
+		 <td>{$Case[por].job}</td>  
+       <td>{$Case[por].email}</td>       
+       <td>{$Case[por].add_time}</td>
+      <td>{$Case[por].phone}</td>
+      <td>{if $Case[por].isbook}是{else}否{/if}</td>     
+      <td align="center">
+	  <a href="book.php?act=send&user_id={$Case[por].user_id}">发送</a> |
+	  <a href="book.php?act=send_no&user_id={$Case[por].user_id}">不发送</a>
+
+    <!--
+      <a href="book.php?act=detail&Case_id={$Case[por].user_id}">详情</a> | 
+	  <a href="Case.php?act=edit&Case_id={$Case[por].user_id}">编辑</a> | 
+      <a href="javascript:;" onclick="listTable.remove({$Case[por].user_id}, '您确认要删除这条记录吗?')" title="删除">移除</a>
+	  -->
+	  </td>
+    </tr>
+    {sectionelse}
+	<tr>
+      <td colspan="10">暂无记录</td>
+    </tr>
+    {/section}
+    <tr>
+    <td >
+    <input type="hidden" name="act" value="" />
+   <!--<input name="swap_type_id" type="button" id="btnSubmit1" value="批量删除" disabled="disabled" class="button" onClick="batch_drop();"  />-->
+    <input name="swap_type_id" type="button" id="btnSubmit1" value="批量发送" disabled="disabled" class="button" onClick="batch_drop();"  />
+
+	</td>
+	<td>
+	    <input name="swap_type_id2" type="button" id="btnSubmit2" value="批量取消" disabled="disabled" class="button" onClick="batch_drop_no();"  />
+
+	</td>
+    <td colspan="9" align="right">{include file="page.html"}</td>
+    </tr>
+  </table>
+{if $full_page}
+</div>
+</form>
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+  
+  
+
+  -->
+</script>
+{include file="footer.html"}
+{/if}

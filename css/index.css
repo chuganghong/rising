@@ -1,0 +1,57 @@
+/*index_css*/
+.thr_left {
+	width:216px;
+	margin-right:48px;
+	float:left;
+}
+.cont_box {
+	padding:7px 0px 7px 0px;
+	border-top:1px solid #c2c2c0;
+	font-size:12px;
+}
+.cont_box2 {
+	padding:7px 0px 7px 0px;
+	border-top:1px solid #c2c2c0;
+	text-indent:20px;
+	font-size:12px;
+}
+.thr_mid {
+	width:380px;
+	float:left;
+}
+.thr_right {
+	width:116px;
+	padding-top:7px;
+	float:right;
+}
+
+/*contact_css*/
+.cont_box3 {
+	padding:38px 0px 7px 20px;
+	width:360px;
+}
+/*about_css*/
+.two_left {
+	width:644px;
+	float:left;
+}
+/*works_css*/
+.cont_box4 {
+	padding:15px 0px 15px 0px;
+	border-top:1px solid #c2c2c0;
+}
+.cont_box4 li {
+	width:186px;
+	height:118px;
+	line-height:20px;
+	margin-right:12px;
+	float:left;
+	text-align:center;
+}
+.cont_box4 li a:hover {
+	border-bottom:1px solid #c2c2c0;	
+}
+
+.cont_box4 .margin {
+	margin-right:0px;
+}

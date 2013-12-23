@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$smarty.const.SITE_NAME}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/global.css" rel="stylesheet" type="text/css" />
+{literal}
+<style type="text/css">
+#header{
+	height:62px;
+	overflow:hidden;
+	padding:5px;
+	background-image: url(images/dbg.gif);
+	background-repeat: repeat-x;
+	background-position: 0 0;
+}
+.h_left{
+  width: 308px;
+   float: left;
+}
+.h_right{
+	float: right;
+	height: 67px;
+	
+}
+.h_r_u{
+	height: 39px;
+}
+.h_r_u_long{
+	float: right;
+	width: 206px;
+	height: 20px;
+	padding-top: 19px;
+	padding-right: 50px;
+}
+.h_r_u_1{
+	background-image: url(images/home.gif);
+	background-repeat: no-repeat;
+	float:left;
+	color: #FFFFFF;
+	padding-left: 15px;
+	
+}
+.h_r_u_2{
+	background-image: url(images/anquan.gif);
+	background-repeat: no-repeat;
+	float:left;
+	color: #FFFFFF;
+	padding-left: 15px;
+	margin-left: 20px;
+}
+.h_r_d{
+	height: 28px;
+}
+.h_r_d_long{
+	float: right;
+	width: 608px;
+	padding-left: 73px;
+}
+.h_r_d_l{
+	width: 43px;
+	background-image: url(images/h_r_d_l.gif);
+	background-repeat: no-repeat;
+	float:left;		
+}
+.h_r_d_l{
+	width: 43px;
+	background-image: url(images/h_r_d_l.gif);
+	background-repeat: no-repeat;
+	float:left;	
+	height: 22px;	
+}
+.h_r_d_m{
+	width: 525px;
+	background-image: url(images/heng.gif);
+	background-repeat: no-repeat;
+	float:left;
+	height: 22px;
+	line-height: 22px;
+}
+.h_r_d_r{
+	width: 40px;
+	background-image: url(images/h_r_d_r.gif);
+	background-repeat: no-repeat;
+	float:left;
+	height: 22px;
+}
+</style>
+<script type="text/javascript">
+function modalDialog(url, name, width, height)
+{
+  if (width == undefined)
+  {
+    width = 400;
+  }
+  if (height == undefined)
+  {
+    height = 300;
+  }
+
+  if (window.showModalDialog)
+  {
+    window.showModalDialog(url, name, 'dialogWidth=' + (width) + 'px; dialogHeight=' + (height+5) + 'px; status=off');
+  }
+  else
+  {
+    x = (window.screen.width - width) / 2;
+    y = (window.screen.height - height) / 2;
+
+    window.open(url, name, 'height='+height+', width='+width+', left='+x+', top='+y+', toolbar=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, modal=yes');
+  }
+}
+</script>
+{/literal}
+</head>
+<body>
+<div id="header">
+	<div class="h_left"><img src="images/bg3.png" height="62" width="308" /></div>
+	
+    <div class="h_right">
+    	<div class="h_r_u">
+        	<div class="h_r_u_long">
+            
+                <div class="h_r_u_1"> <a href="../" target="_blank" style="color:#FFFFFF"><span>网站首页</span></a></div>
+                <div class="h_r_u_2"><a href="index.php?act=logout" style="color:#FFFFFF" target="_top">安全退出</a></div>
+            </div>
+        </div>
+        <div class="h_r_d">
+        	<div class="h_r_d_long">
+                <div class="h_r_d_l"></div>
+                <div class="h_r_d_m"> &nbsp;   &nbsp; 当前角色：<strong>{$smarty.session.admin_true}</strong> &nbsp;  &nbsp;|&nbsp; &nbsp; <span>{$role}</span> &nbsp;  &nbsp;|&nbsp; &nbsp;   <a href="admin_user.php?act=edit&id={$smarty.session.admin_id}" target="main-frame">修改资料</a> &nbsp;  &nbsp;|&nbsp; &nbsp;  <a href="javascript:window.top.frames['main-frame'].document.location.reload();window.top.frames['header-frame'].document.location.reload();window.top.frames['menu-frame'].document.location.reload()">刷新</a> &nbsp;  &nbsp;|&nbsp; &nbsp;  <a href="main.php?act=clear_cache" target="main-frame">清除缓存</a></div>
+                <div class="h_r_d_r"></div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+<div id="load-div" style="padding:5px; margin:0 auto; width:140px; margin-top:-40px;text-align:center; display:none; color: #FF9900; background-color:#003399">
+	<img src="images/top_loader.gif" width="16" height="16" alt="正在处理您的请求..." style="vertical-align: middle" /> &nbsp;&nbsp;正在处理您的请求...
+</div>
+</body>
+</html>

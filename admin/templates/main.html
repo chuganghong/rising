@@ -1,0 +1,58 @@
+{include file="header.html"}
+<script type="text/javascript" charset="utf-8" src="js/library.js"></script>
+<div id="board">
+	<img src="images/icons/home_48.png" class="logo" />
+    <p><SCRIPT type="text/javascript">Hello();</SCRIPT><span class="font_b"><strong>{$smarty.session.admin_true}</strong></span>	  
+        <br><SCRIPT type="text/javascript">GetDate();</SCRIPT>
+        <br>上次登录：<span class="text-key">{$smarty.session.last_login}</span>
+    </p>
+    <span class="clear"></span>
+</div>
+<div class="list-div">
+<fieldset>
+		<legend>统计信息</legend>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+		  	<tr>
+				<th colspan="4" >系统信息</th>
+	  	    </tr>
+            <tr class='line'>
+                <td width='120'>服务器操作系统:</td>						
+                <td width='222'>{$sys_info.os} ({$sys_info.ip})</td>
+                <td width='137'>Web 服务器:</td>
+                <td>{$sys_info.web_server}</td>						
+            </tr>
+            <tr class='line'>
+                <td width='120'>PHP 版本:</td>						
+                <td>{$sys_info.php_ver}</td>
+                <td>MySQL 版本:</td>
+                <td>{$sys_info.mysql_ver}</td>
+            </tr>
+            <tr class='line'>
+                <td width='120'>安全模式:</td>						
+                <td>{$sys_info.safe_mode}</td>
+                <td>安全模式GID:</td>
+                <td>{$sys_info.safe_mode_gid}</td>						
+            </tr>
+            <tr class='line'>
+                <td width='120'>Socket 支持:</td>						
+                <td>{$sys_info.socket}</td>
+                <td>时区设置:</td>
+                <td>{$sys_info.timezone}</td>						
+            </tr>
+            <tr class='line'>
+                <td width='120'>GD 版本:</td>						
+                <td>{$sys_info.gd}</td>
+                <td>Zlib 支持:</td>						
+                <td>{$sys_info.zlib}</td>
+            </tr>
+            <tr class='line'>
+                <td width='120'>文件上传的最大大小:</td>						
+                <td>{$sys_info.max_filesize}</td>
+                <td>编码</td>
+                <td>{$charset}</td>						
+            </tr>			
+			</table>	
+		</fieldset>
+</div>
+
+{include file="footer.html"}

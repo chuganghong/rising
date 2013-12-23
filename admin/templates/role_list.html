@@ -1,0 +1,31 @@
+{if $full_page}
+{include file="header.html"}
+<div class="list-div" id="listDiv">
+{/if}
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="table">
+  <tr>
+    <th>角色名称</th>
+    <th>角色描述</th>
+    <th>人数</th>
+    <th>操作</th>
+  </tr>
+  {foreach from=$role_list item=list}
+  <tr>
+    <td>{$list.role_name}</td>
+    <td>{$list.role_describe}</td>
+    <td>{$list.num}</td>
+    <td align="center">
+      <a href="admin_user.php?act=list&admin_role={$list.role_id}" title="成员列表">成员列表</a> | 
+      <a href="role.php?act=edit&id={$list.role_id}" title="编辑">编辑</a> | 
+      <a href="javascript:;" onclick="listTable.remove({$list.role_id}, '您确定要删除这条记录吗?')" title="移除">移除</a></td>
+  </tr>
+  {foreachelse}
+  <tr><td class="no-records" colspan="4">暂无记录</td></tr>
+  {/foreach}
+</table>
+
+{if $full_page}
+</div>
+{include file="footer.html"}
+{/if}
